@@ -5,10 +5,32 @@
  */
 package view;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import model.RegistroMedicoTableModel;
+import programamedico2.ProgramaMedico2;
+
 
 
 
 public class FormRegistroMedico extends javax.swing.JFrame {
+
+   
+    RegistroMedicoTableModel tableModel = new RegistroMedicoTableModel();
+    
+    String pathFile = "db.txt";
+    String pathFileTemp = "dbTemp.txt";
+    String readFile = "";
+    
+    List <ProgramaMedico2> listRegistroMedico = new ArrayList<>();
+    
+    private final TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
+    // shaddai shaiu dai ΘθΛΞΟοΣ
 
     
     public FormRegistroMedico() {
@@ -362,6 +384,50 @@ public class FormRegistroMedico extends javax.swing.JFrame {
     private javax.swing.JTextField txtSala;
     // End of variables declaration//GEN-END:variables
 
-    
+    private void limpardados() {
+        txtNoRm.setText("");
+        txtPaciente.setText("");
+        txtEndereco.setText("");
+        txtClasse.setText("");
+        txtPesquisa.setText("");
+        txtSala.setText("");
+        
+        
+        
+    }
 
+    public void mostrardados(){
+        try {
+            listRegistroMedico.clear();
+            String readLine;
+            File file = new File(pathFile);
+            
+            if (!file.exists() ){
+                file.createNewFile();
+            }
+            
+            BufferedReader bufReader;
+            try (FileReader reader = new FileReader(file)){
+                bufReader = new BufferedReader(reader);
+                
+                while ((readLine = bufReader.readLine()) != null){
+                    if (readLine.equals("")){
+                        continue;
+                    }
+                    String [] splitData = readLine.split(";");
+                    ProgramaMedico2 rm = new ProgramaMedico2();
+                    
+                    rm.setRm(splitData[0]);
+                    rm.setPaciente(splitData[1]);
+                    rm.setEndereco(splitData[2]);
+                    rm.setClasse(splitData[3]);
+                    rm.setSala(splitData[4]);
+                    
+                }
+            }
+        } catch{
+            // TODO colocar alguma coisa aqui dentro
+            // obs: TODO = to do (inglês)
+        }
+    }
 }

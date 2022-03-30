@@ -21,18 +21,33 @@ public class RegistroMedicoTableModel extends AbstractTableModel{
         fireTableDataChanged();
     }
     
+    
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return list.size();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return columnNames.length;
+      
     }
 
     @Override
-    public Object getValueAt(int i, int i1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        switch (columnIndex){
+            case 0:
+                return list.get(rowIndex).getRm();
+            case 1:
+                return list.get(rowIndex).getPaciente();
+            case 2:
+                return list.get(rowIndex).getEndereco();
+            case 3:
+                return list.get(rowIndex).getClasse();
+            case 4:
+                return list.get(rowIndex).getSala();
+            default:
+                return null;
+        }
     }
 }

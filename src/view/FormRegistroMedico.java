@@ -425,9 +425,9 @@ public class FormRegistroMedico extends javax.swing.JFrame {
                     
                 }
             }
-        } catch{
-            // TODO colocar alguma coisa aqui dentro
-            // obs: TODO = to do (inglês)
+        } catch(IOException ex) {
+        
+            Logger.getLogger(FormRegistroMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
